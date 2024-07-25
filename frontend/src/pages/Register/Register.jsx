@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import "./Register.css"
 import axios from '../../config/axios'
 import {register} from '../../services/auth.services'
-
+import {useNavigate} from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
+import { toastError, toastSuccess } from '../../utility/toast';
 
 function Register() {
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username : "",
     email : "",
@@ -31,10 +35,16 @@ function Register() {
     event.preventDefault();
     try {
       const response = await register(formData);
-      console.log(response)
+      console.log(response.message);
+      navigate("/")
+      toast(response)
+      // samo kle je boljse ce posljemo message iz serverja
+      toastSuccess("Sign-up done!")
 
     } catch (error) {
       console.log(error)
+      // samo kle je boljse ce posljemo message iz serverja
+      toastError("Try again");
       
     }
 
@@ -43,7 +53,7 @@ function Register() {
   return (
     <div id='forma'> 
 
-      <h1 id='burek'> Registriraj se debil</h1>
+      <h1 id='burek'> Registracija</h1>
 
       <form onSubmit={handleSubmit}>
 
@@ -65,6 +75,14 @@ function Register() {
         <button>REGISTER NOW</button>
 
       </form>
+      
+      <br></br>
+      <br></br>
+      <div style={{fontSize: "13px"}}>
+        Already have an account? <Link to={'/login'}>LOGIN</Link>
+      </div>
+
+      
 
     </div>
 

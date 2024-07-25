@@ -4,8 +4,6 @@ import {prisma} from "../config/prisma.js"
 // funkcija register
 export class AuthService {
 
-    
-
     // kle ko returnas ustvarjenega userja ti doda še id
     static async createUser(username, email, password){
         const user = await prisma.user.create({

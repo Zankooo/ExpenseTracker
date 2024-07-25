@@ -24,16 +24,18 @@ export const register = async (request, response) => {
     // ce vseh parametrov nimamo potem 
     if (!username | !email | !password) {
         response.status(400).json({
-            message : "nekaj manjka!",
+            message : "Nekaj manjka!",
         });
+        return;
         
     }
     const existingUser = await AuthService.findOneByEmail(email)
 
     if (existingUser) {
         response.status(400).json({
-            message : "uporabnik ze obstaja",
+            message : "Uporabnik že obstaja",
         });
+        return;
     }
 
     const hashedPassword = hashPassword(password);
@@ -41,9 +43,10 @@ export const register = async (request, response) => {
     const token = generateToken(user.id);
 
     response.status(200).json({
-        message : "uspelo nam je, uporabnik kreiran",
+        message : "Registracija uspešna!",
         user : {...user, token}
     });
+
     
 }
 
@@ -54,32 +57,35 @@ export const login = async (request, response) => {
     // ce vseh parametrov nimamo potem 
     if (!email | !password) {
         response.status(400).json({
-            message : "nekaj manjka!",
+            message : "Nekaj manjka!",
         });
+        return;
     }
     const existingUser = await AuthService.findOneByEmail(email);
 
     //ali je ta spremenljivka undefined ali null
     if (!existingUser) {
         response.status(400).json({
-            message : "uporabnik s tem mailom ne obstaja"
+            message : "Uporabnik s tem mailom ne obstaja!"
         });
+        return;
         
     }
 
-    const isCorrectPassword = bcrypt.compare(password, existingUser.password);
+    const isCorrectPassword = await bcrypt.compare(password, existingUser.password);
+    console.log("izpisemo; ", isCorrectPassword);
     if (!isCorrectPassword) {
         response.status(400).json({
-            message : "napacno geslo"
+            message : "Napačno geslo!"
         });
-        
+        return;
     }
     
-    const token = generateToken(user.id);
+    const token = generateToken(existingUser.id);
 
     response.status(200).json({
-        message : "prijava uspesna!",
-        user : {...user, token}
+        message : "Prijava uspešna!",
+        user : {...existingUser, token}
     });
     
 }
