@@ -5,12 +5,13 @@ import { register } from '../../services/auth.services';
 
 
 function Main() {
-    const [user,setUser] = useState("")
+    const [user,setUser] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
-        
+        let user = localStorage.getItem("user");
+        user = JSON.parse(user);
+        console.log("uporabnik:" , user);
         if (!user) {
           navigate('/login');
         }
@@ -26,7 +27,8 @@ function Main() {
 
   return (
     <>
-    <div>Welcome {user.username}</div>
+    
+    <div>Welcome {user && user.username}</div>
     <button onClick={logout}>Log out</button>
     </>
   )
