@@ -5,8 +5,7 @@ import Main from './pages/Main/Main';
 import Test from './pages/Test';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
-import { ToastContainer, toast, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function App() {
@@ -22,7 +21,10 @@ function App() {
     </Routes>
     </Router>
 
-    <ToastContainer />
+    <Toaster
+      position="top-right"
+      reverseOrder={false}
+    />
 
     </div>
   );

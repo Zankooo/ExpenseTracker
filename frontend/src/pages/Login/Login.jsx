@@ -3,8 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import axios from '../../config/axios'
 import {login} from '../../services/auth.services'
-
-import { toastError, toastSuccess } from '../../utility/toast';
+import toast from 'react-hot-toast';
 
 
 function Login() {
@@ -40,18 +39,12 @@ function Login() {
       const response = await login(formData);
       console.log("Uspešno!", response)
       navigate("/");
-      //kle pa success
-      //response.message to damo notr
-      // zgleda samo 11 znakcov gre v eno linijo, potem skoci v drugo
-      //torej eno besedo v prvih enajst in drugo v drugih enajst
-      // zgleda obcasno pa samo 9
-      toastSuccess("Login done, Welcome!");
+      toast.success(response.message);
 
     } catch (error) {
       console.log("Login ne dela ker: " , error)
-      // error.response.data.message tole je bolj prav da se da notri
-      toastError("Try again");
-      //kle je toast error
+      toast.error(error.response.data.message);
+      
     }
 
   }

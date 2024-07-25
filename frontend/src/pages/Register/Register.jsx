@@ -5,7 +5,6 @@ import {register} from '../../services/auth.services'
 import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { toastError, toastSuccess } from '../../utility/toast';
 
 function Register() {
 
@@ -38,13 +37,12 @@ function Register() {
       console.log(response.message);
       navigate("/")
       toast(response)
-      // samo kle je boljse ce posljemo message iz serverja
-      toastSuccess("Sign-up done!")
+      
+      toast.success(response.message);
 
     } catch (error) {
       console.log(error)
-      // samo kle je boljse ce posljemo message iz serverja
-      toastError("Try again");
+      toast.error(error.response.data.message)
       
     }
 
@@ -75,7 +73,7 @@ function Register() {
         <button>REGISTER NOW</button>
 
       </form>
-      
+
       <br></br>
       <br></br>
       <div style={{fontSize: "13px"}}>
