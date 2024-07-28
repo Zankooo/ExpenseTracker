@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import "./Register.css"
 import axios from '../../config/axios'
 import {register} from '../../services/auth.services'
 import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { Forma, Container, Button } from './Register.styles';
+
+
 
 function Register() {
 
@@ -49,41 +51,43 @@ function Register() {
   }
 
   return (
-    <div id='forma'> 
+    <Container>
+      <Forma> 
 
-      <h1 id='burek'> Registracija</h1>
+        <h1 id='burek'>Registracija</h1>
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
-        <div className='form-group'>
-          <label htmlFor='username'>Username</label>
-          <input name='username' id='username' type='text' onChange={handleChange}></input>
-        </div>
+          <div className='form-group'>
+            <label htmlFor='username'>Username</label>
+            <input name='username' id='username' type='text' onChange={handleChange}></input>
+          </div>
 
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input name='email' id='email' type='text' onChange={handleChange} ></input>
-        </div>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <input name='email' id='email' type='text' onChange={handleChange} ></input>
+          </div>
 
-        <div className='form-group'>
-          <label htmlFor='pwd'>Password</label>
-          <input type='password' id='pwd' name='password' onChange={handleChange}></input>
-        </div>
+          <div className='form-group'>
+            <label htmlFor='pwd'>Password</label>
+            <input type='password' id='pwd' name='password' onChange={handleChange}></input>
+          </div>
 
-        <button>REGISTER NOW</button>
+          <Button>REGISTER NOW</Button>
+          
 
-      </form>
+        </form>
 
-      <br></br>
-      <br></br>
-      <div style={{fontSize: "13px"}}>
-        Already have an account? <Link to={'/login'}>LOGIN</Link>
-      </div>
+        <br></br>
+        <br></br>
+        <p style={{fontSize: "13px"}}>
+          Already have an account? <Link to={'/login'}>LOGIN</Link>
+        </p>
 
-      
+        
 
-    </div>
-
+      </Forma>
+    </Container>
   )
 }
 

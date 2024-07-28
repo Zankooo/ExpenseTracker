@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import axios from '../../config/axios'
 import {login} from '../../services/auth.services'
 import toast from 'react-hot-toast';
+import { Button, Container, Forma } from './Login.styles';
 
 
 function Login() {
@@ -44,15 +45,14 @@ function Login() {
     } catch (error) {
       console.log("Login ne dela ker: " , error)
       toast.error(error.response.data.message);
-      
     }
 
   }
 
   return (
-    <>
+    <Container>
     
-    <div id='forma'> 
+    <Forma> 
 
       <h1 id='burek'>Login</h1>
 
@@ -68,20 +68,18 @@ function Login() {
           <input type='password' id='pwd' name='password' onChange={handleChange}></input>
         </div>
 
-        <button>LOGIN NOW</button>
+        <Button>LOGIN NOW</Button>
 
       </form>
       <br></br>
       <br></br>
-      <div style={{fontSize: "13px"}}>
+      <p style={{fontSize: "13px"}}>
         Need an account? <Link to={'/register'}>SIGN UP</Link>
-      </div>
+      </p>
       
-
-      
-    </div>
+    </Forma>
     
-    </>
+    </Container>
   )
 }
 
