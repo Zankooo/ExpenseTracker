@@ -10,6 +10,7 @@ authRouter.post("/register", register);
 authRouter.post("/login", login);
 authRouter.get("/me", authMiddleWare, me);
 
+
 export default authRouter;
 
 
