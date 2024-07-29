@@ -11,6 +11,16 @@ export const Header = styled.div`
 
 
 `
+export const Grid = styled.div`
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+
+`
+export const Container = styled.div`
+    padding: 0 50px;
+    width: 100%;
+`
 
 export const Button = styled.div`
     background-color: white;

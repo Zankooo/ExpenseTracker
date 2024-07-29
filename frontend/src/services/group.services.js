@@ -12,8 +12,8 @@ export async function createGroup(data){
     return response.data;
 }
 
-export async function getGrupa(){
-    const response = await axios.get("/groups/group");
+export async function getGrupa(groupId){
+    const response = await axios.get(`/groups/group?groupId=${groupId}`);
     if(response.data){
         console.log(response.data);
     }

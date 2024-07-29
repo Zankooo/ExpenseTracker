@@ -26,7 +26,7 @@ export async function createGroup(request, response){
 }
 
 export async function getGrupa(request, response){
-    const {groupId} = request.params;
+    const {groupId} = request.query;
     const group = await GroupService.getGroup(groupId)
     response.status(200).json({
         group

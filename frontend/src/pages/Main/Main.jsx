@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { register } from '../../services/auth.services';
-import { Header, Button } from './Main.styles';
+import { Header, Button, Grid, Container} from './Main.styles';
 import { MdLogout } from "react-icons/md";
 import {createGroup, getGroupsForUser} from "../../services/group.services";
 import toast from 'react-hot-toast';
+import GroupItem from '../../components/GroupItem.js';
+
 
 function Main() {
     const [user,setUser] = useState(null);
@@ -15,6 +17,8 @@ function Main() {
     });
 
     const [groups, setGroups] = useState([]);
+
+  
     
     useEffect(() => {
       let user = localStorage.getItem("user");
@@ -66,6 +70,9 @@ function Main() {
         setGroups((groups) => (
           [...groups, group]
           ))
+        setFormData({
+          name: "", description : ""
+        })
         toast.success(response.message);
   
       } catch (error) {
@@ -87,27 +94,31 @@ function Main() {
       </Button>
 
     </Header>
-
-    
-
+    <Container>
     <form onSubmit={handleSubmit}>
       <label htmlFor='name'>Group name:</label>
-      <input id='name' name='name' onChange={handleChange}></input>
+      <input id='name' name='name' onChange={handleChange} value={formData.name}></input>
 
       <label htmlFor='description'>Group description:</label>
-      <input name='description' id='description' onChange={handleChange}></input>
+      <input name='description' id='description' onChange={handleChange} value={formData.description}></input>
 
       <button>Button</button>
     </form>
-
-    <div>
-      {groups.map((group) => {
-        <div>
-        <div>{group.name}</div>
-        <div>{group.description}</div>
-        </div>
+   
+    <br></br>
+    <div className='logika-za-grupe'>
+      {groups.length > 0 ? (
+        <Grid>
+          {groups.map(function (group) {
+            return <GroupItem group={group}>
+              
+              </GroupItem>
       })}
+    </Grid>
+    ) : (<h3 className='naredi-ce-ni-grup'>No groups</h3>)}
     </div>
+    
+    </Container>
 
     </>
   )

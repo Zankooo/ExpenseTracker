@@ -5,6 +5,7 @@ import Test from './pages/Test';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import Group from './pages/Group/Group';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path='/register' element={<Register/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/' element={<Main/>}></Route>
+      <Route path='/group/:groupId' element={<Group/>}></Route>
     </Routes>
     </Router>
 
@@ -24,6 +26,7 @@ function App() {
       position="top-right"
       reverseOrder={false}
     />
+    
 
     </div>
   );

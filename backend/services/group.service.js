@@ -20,9 +20,10 @@ export class GroupService {
     }
 
     static async getGroup(groupId){
+      console.log('group id je ' , groupId);
         const group = await prisma.group.findFirst({
             where: {
-                groupId : groupId
+                id : groupId
             }
         });
         return group;
