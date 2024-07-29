@@ -60,7 +60,7 @@ function Login() {
 
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
-          <input name='email' id='email' type='text' onChange={handleChange} ></input>
+          <input name='email' id='email' type='text' onChange={handleChange}></input>
         </div>
 
         <div className='form-group'>

@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import { register } from '../../services/auth.services';
 import { Header, Button } from './Main.styles';
 import { MdLogout } from "react-icons/md";
-import {createGroup} from "../../services/group.services";
+import {createGroup, getGroupsForUser} from "../../services/group.services";
 import toast from 'react-hot-toast';
 
 function Main() {
@@ -16,23 +16,34 @@ function Main() {
 
     const [groups, setGroups] = useState([]);
     
-    useEffect(() =>{
-      console.log("Tole so grupe: " , groups);
-      console.log("tole je form data: " , formData)
-    }, [groups, formData]);
-
+    useEffect(() => {
+      let user = localStorage.getItem("user");
+      user = JSON.parse(user);
+      console.log("uporabnik:", user);
+      if (!user) {
+        navigate('/login');
+        return
+      }
+      setUser(user);
+    }, []);
 
     useEffect(() => {
-        let user = localStorage.getItem("user");
-        user = JSON.parse(user);
-        console.log("uporabnik:", user);
-        if (!user) {
-          navigate('/login');
-        }
-        setUser(user);
-        
-      }, []);
+      console.log("Tole so grupe: " , groups);
+      console.log("tole je form data: " , formData);
+    }, [groups, formData]);
 
+    useEffect( () => {
+      pridobiGroups();
+    }, [user]);
+
+    async function pridobiGroups(){
+      if(user){
+        const response = await getGroupsForUser(user.id);
+        setGroups(response.groups);
+      }
+        
+    }
+    
     function logout(){
         localStorage.removeItem("user");
         navigate("/login");
@@ -48,11 +59,11 @@ function Main() {
 
     async function handleSubmit(event){
       event.preventDefault();
-
       try {
         const response = await createGroup(formData);
         console.log("Uspešno!", response);
-        setGroups((group) => (
+        const group = response.group;
+        setGroups((groups) => (
           [...groups, group]
           ))
         toast.success(response.message);
@@ -88,6 +99,16 @@ function Main() {
 
       <button>Button</button>
     </form>
+
+    <div>
+      {groups.map((group) => {
+        <div>
+        <div>{group.name}</div>
+        <div>{group.description}</div>
+        </div>
+      })}
+    </div>
+
     </>
   )
 }

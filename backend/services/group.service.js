@@ -29,7 +29,7 @@ export class GroupService {
     }
 
     static async getGroupsForUser(userId){
-        const userWithGroups = await prisma.user.findMany({
+        const userWithGroups = await prisma.user.findFirst({
             where: { id : userId },
             include: { groups : true },
           });
