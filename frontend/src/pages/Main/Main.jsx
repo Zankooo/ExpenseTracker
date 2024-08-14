@@ -48,7 +48,7 @@ function Main() {
         
     }
     
-    function logout(){
+    function logout() {
         localStorage.removeItem("user");
         navigate("/login");
     }

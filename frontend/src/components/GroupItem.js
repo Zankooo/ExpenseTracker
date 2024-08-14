@@ -8,7 +8,7 @@ function GroupItem({group}) {
     const navigate = useNavigate()
     
     const handleClick = () => {
-      navigate(`/group/${group.id}`,  )
+      navigate(`/group/${group.id}`)
     };
     
 

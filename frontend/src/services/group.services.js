@@ -22,14 +22,14 @@ export async function getGrupa(groupId){
 
 export async function getGroupsForUser(){
     const response = await axios.get("/groups/userGroups");
-    if(response.data){
+    if (response.data){
         console.log(response.data);
     }
     return response.data;
 }
 
 export async function addUser(userId, groupId){
-    const response = await axios.post(`/groups/invite?userId=${userId}?groupId=${groupId}`);
+    const response = await axios.post(`/groups/invite?userId=${userId}&groupId=${groupId}`);
     return response.data;
 }
 

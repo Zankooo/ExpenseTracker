@@ -15,7 +15,6 @@ export async function login(data){
     const response = await axios.post("/auth/login", data);
     if (response.data){
         localStorage.setItem("user", JSON.stringify(response.data.user))
-
     }
     return response.data;
 }
