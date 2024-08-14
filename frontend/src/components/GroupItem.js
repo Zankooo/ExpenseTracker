@@ -14,7 +14,7 @@ function GroupItem({group}) {
 
   return (
     <Card onClick={handleClick}>
-    <div>{group.id}</div>
+    
     <div className='group-name'>{group.name}</div>
     <div className='group-desc'>{group.description}</div>
     </Card>

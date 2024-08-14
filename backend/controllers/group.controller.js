@@ -22,7 +22,6 @@ export async function createGroup(request, response){
         group : group
     })
 
-
 }
 
 export async function getGrupa(request, response){
@@ -39,6 +38,16 @@ export async function getGroupsForUser(request,response){
     const groups = await GroupService.getGroupsForUser(userId);
     response.status(200).json({
         groups
+    })
+    return;
+}
+
+export async function addUser(request, response){
+    const userId = request.query.userId;
+    const groupId = request.query.groupId; 
+    const group = await GroupService.addUser(userId, groupId);
+    response.status(200).json({
+        message : "you have been added to groupp!"
     })
     return;
 }

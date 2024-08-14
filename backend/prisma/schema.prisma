@@ -18,20 +18,31 @@ model User {
   username String @unique
   password String 
   email String @unique
-  groups Group[]
   expenses Expense[]
   returnsFrom Return[] @relation("PaymentFrom") 
   returnsTo Return[] @relation("PaymentTo")
+  groups UserGroup[]
+  
+
+}
+
+model UserGroup {
+  id String @id @default (auto()) @map("_id") @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  group Group @relation(fields: [groupId], references: [id])
+  userId String @db.ObjectId
+  groupId String @db.ObjectId
+  isAdmin Boolean
+  @@index([userId, groupId])
 }
 
 model Group {
   id String @id @default (auto()) @map("_id") @db.ObjectId
   name String 
-  admin User @relation(fields: [adminId], references: [id])
-  adminId String @db.ObjectId
   description String 
   expenses Expense[]
-  
+  members UserGroup[] 
+
 }
 
 model Expense {

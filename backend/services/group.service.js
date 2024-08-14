@@ -9,18 +9,14 @@ export class GroupService {
             data: {
                 name: name,
                 description: description,
-                admin: {
-                  connect: {
-                    id: adminId
-                  }
-                }
+                members: { create: [{ userId: adminId, isAdmin: true}] },
+                
               }
         });
         return group;
     }
 
     static async getGroup(groupId){
-      console.log('group id je ' , groupId);
         const group = await prisma.group.findFirst({
             where: {
                 id : groupId
@@ -30,12 +26,24 @@ export class GroupService {
     }
 
     static async getGroupsForUser(userId){
-        const userWithGroups = await prisma.user.findFirst({
-            where: { id : userId },
-            include: { groups : true },
+        const userWithGroups = await prisma.userGroup.findMany({
+            where: { userId : userId },
+            include: { group : true },
           });
+        const groups = userWithGroups.map(userGroup => userGroup.group);
+        return groups;
+    }
+
+    static async addUser(userId, groupId){
+      const neki = await prisma.userGroup.create({
+        data : {
+          userId : userId,
+          groupId : groupId,
+          isAdmin : false
+        }
         
-          return userWithGroups.groups;
+      })
+      console.log("neki je " , neki);
     }
 
 

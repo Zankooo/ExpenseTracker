@@ -94,6 +94,7 @@ function Main() {
       </Button>
 
     </Header>
+
     <Container>
     <form onSubmit={handleSubmit}>
       <label htmlFor='name'>Group name:</label>
@@ -104,6 +105,7 @@ function Main() {
 
       <button>Button</button>
     </form>
+   
    
     <br></br>
     <div className='logika-za-grupe'>

@@ -28,5 +28,10 @@ export async function getGroupsForUser(){
     return response.data;
 }
 
+export async function addUser(userId, groupId){
+    const response = await axios.post(`/groups/invite?userId=${userId}?groupId=${groupId}`);
+    return response.data;
+}
+
 
 
