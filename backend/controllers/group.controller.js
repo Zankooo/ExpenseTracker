@@ -7,7 +7,7 @@ export async function createGroup(request, response){
     const {name, description} = request.body;
     const adminId = request.user;
 
-    if(!name | !description){
+    if (!name | !description){
         response.status(400).json({
             message: "Name ali description nam manjka"
         })
@@ -43,12 +43,20 @@ export async function getGroupsForUser(request,response){
 }
 
 export async function addUser(request, response){
-    const userId = request.query.userId;
-    const groupId = request.query.groupId; 
-    const group = await GroupService.addUser(userId, groupId);
+    const {userId, groupId} = request.query;
+
+    const existingMember = await GroupService.isMember(userId, groupId);
+
+    if (existingMember) {
+        response.status(400).json({
+            message: "You are already a member of this group"
+        });
+        return;
+    }
+
+    await GroupService.addUser(userId, groupId);
     response.status(200).json({
-        message : "you have been added to groupp!"
-    })
-    return;
+        message : "you have been added to group!"
+    });
 }
 
