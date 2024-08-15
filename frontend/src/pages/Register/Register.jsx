@@ -37,11 +37,19 @@ function Register() {
     try {
       const response = await register(formData);
       console.log(response.message);
-      navigate("/")
-      toast(response)
+      
+      const inviteGroupId = localStorage.getItem('inviteGroupid');
+      if (inviteGroupId){
+        navigate(`/invite/${inviteGroupId}`);
+      }
+      else{
+        navigate(`/`)
+
+      }
       
       toast.success(response.message);
-
+      localStorage.removeItem('inviteGroupid');
+      
     } catch (error) {
       console.log(error)
       toast.error(error.response.data.message)

@@ -38,9 +38,18 @@ function Login() {
     // ne dela
     try {
       const response = await login(formData);
-      console.log("Uspešno!", response)
-      navigate("/");
+      
+      const inviteGroupId = localStorage.getItem('inviteGroupid');
+      if (inviteGroupId){
+        navigate(`/invite/${inviteGroupId}`);
+      }
+      else{
+        navigate(`/`);
+
+      }
+      
       toast.success(response.message);
+      localStorage.removeItem('inviteGroupid');
 
     } catch (error) {
       console.log("Login ne dela ker: " , error)

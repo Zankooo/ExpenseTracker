@@ -1,10 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import { addUser } from '../../services/group.services';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 function Invite() {
+
+  const done = useRef(false);
+
+  const fetchInvite = useCallback(async () => {
+    try {
+        const response = await addUser(user.id, groupId); 
+        toast.success(response.message);
+        navigate(`/group/${groupId}`);
+      } 
+      catch (error) {
+        toast.error(error.response.data.message);
+        navigate(`/group/${groupId}`);
+      }
+  }, []);
 
   const { groupId } = useParams();
   let user = localStorage.getItem("user");
@@ -14,20 +28,21 @@ function Invite() {
 
   useEffect(() => {
     if (user) {
-      fetchInvite()
+      if(done.current == false){
+        fetchInvite();
+        done.current = true;
+      }
     }
-  }, [user])
+    else {
+      localStorage.setItem('inviteGroupid', groupId);
+      navigate(`/register`);
+      
+    }
+    
+  }, [fetchInvite]);
+  
 
-  async function fetchInvite() {
-    try {
-      const response = await addUser(user.id, groupId); 
-      toast.success(response.message);
-      navigate(`/group/${groupId}`);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      navigate(`/group/${groupId}`);
-    }
-  }
+   
 
   return (
     <div>Invite</div>
