@@ -33,5 +33,12 @@ export async function addUser(userId, groupId){
     return response.data;
 }
 
+//dodal za expense
+export async function addExpense(userId, groupId){
+    //sam nevem kaj dat v oklepaje
+    const response = await axios.post(`/groups/invite?userId=${userId}&groupId=${groupId}`);
+    return response.data;
+}
+
 
 

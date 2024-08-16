@@ -1,0 +1,36 @@
+
+#bothInputs{
+    text-align: center;
+}
+
+
+#inputName{
+    border: 1px solid black;
+    margin-right: 15px;
+    width: 280px;
+}
+
+#inputCost{
+    border: 1px solid black;
+    width: 50px;
+}
+
+.empty {
+    border: 2px solid rgb(190, 190, 190);
+  }
+  
+.valid {
+    border: 3px solid rgb(23, 138, 23) !important;
+}
+  
+.invalid {
+    border: 3px solid rgb(242, 78, 78) !important;
+}
+
+
+
+
+/* styles/AddExpenseForm.css */
+
+
+

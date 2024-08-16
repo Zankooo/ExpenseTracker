@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { InviteButton, PopUp } from './InviteForm.styles';
+import { InviteButton } from './InviteForm.styles';
 import { MdClose } from "react-icons/md";
-
+import { PopUp } from './PopUp';
 
 
 function InviteForm({ groupId, closePopUp }) {
@@ -9,6 +9,7 @@ function InviteForm({ groupId, closePopUp }) {
   const APP_URL = process.env.REACT_APP_URL;
 
   const [copied, setCopied] = useState(false);
+  
   
 
   function handleClick(event){

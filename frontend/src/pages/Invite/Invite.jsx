@@ -50,3 +50,15 @@ function Invite() {
 }
 
 export default Invite;
+
+
+
+// 5 folka v group
+// 1 placa za to 20 
+// 20/5 = 4 eur
+
+//20 je nekdo dolzen
+// 40
+
+
+

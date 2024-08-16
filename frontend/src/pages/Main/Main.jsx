@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { register } from '../../services/auth.services';
-import { Header, Button, Grid, Container} from './Main.styles';
+import { Button, Grid} from './Main.styles';
 import { MdLogout } from "react-icons/md";
 import {createGroup, getGroupsForUser} from "../../services/group.services";
 import toast from 'react-hot-toast';
 import GroupItem from '../../components/GroupItem.js';
+import { Container } from '../../components/Container.js';
+import { Header } from '../../components/Header.js';
 
 
 function Main() {
@@ -13,7 +15,7 @@ function Main() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-      name: "", description : ""
+      name: '', description : ''
     });
 
     const [groups, setGroups] = useState([]);
@@ -71,12 +73,12 @@ function Main() {
           [...groups, group]
           ))
         setFormData({
-          name: "", description : ""
+          name: '', description : ''
         })
         toast.success(response.message);
   
       } catch (error) {
-        console.log("Login ne dela ker: " , error)
+        console.log('Login ne dela ker: ' , error);
         toast.error(error.response.data.message);
         
       }

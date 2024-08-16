@@ -1,0 +1,16 @@
+Realno jst ko ugotavljam je lazje nekemu jsx- fileu dodajat style z external css-jem kot iz styled componentami
+- pr styled componenta tam ustvaris html namesto v navadnem kjer imaš v external css samo style in tam html in id ali classname
+- pr styled mores exportat, pr navadnemu nerabis
+- import v fileu v katerega importas je krajsi kar in koda je bolj berliva
+- ko v fileu uporabis styled komponento jo uporabis tako kot si jo tam poimenoval in je spet koda daljsa in manj berljiva
+- navaden external css ti obarva ikonco modro, torej ti takoj v oci pade da je to style
+
+
+
+V Add expense form sem hotel malo polepsat torej css-jat, in dodal sem inline notri, ker se ne splaca
+za dve vrstici delat nov file z stylede component. 
+
+Tako da sem delal z navadnim cssjem
+
+
+
