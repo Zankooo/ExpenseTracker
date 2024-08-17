@@ -1,8 +1,9 @@
 import express from "express";
-import "dotenv/config";
-import authRouter from "./routes/auth.js";
 import cors from "cors";
-import groupsRouter from "./routes/group.js";
+import "dotenv/config";
+import authRouter from "./controllers/auth.controller.js";
+import groupsRouter from "./controllers/group.controller.js";
+import expenseRouter from "./controllers/expense.controller.js";
 
 const app = express();
 
@@ -16,8 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 //
 app.use("/auth", authRouter);
-
 app.use("/groups", groupsRouter);
+app.use("/expense", expenseRouter);
 
 //na kerm portu poslusamo
 app.listen(port, function () {
