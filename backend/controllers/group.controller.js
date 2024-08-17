@@ -58,4 +58,15 @@ groupRouter.post("/invite", authMiddleWare, async function addUser(request, resp
   }
 );
 
+groupRouter.get('/expenses', authMiddleWare, async function getExpenses(request,response){
+  const { groupId } = request.query;
+  const expenses = await GroupService.getExpenses(groupId);
+  response.status(200).json({
+    expenses
+  })
+  return;
+});
+
+
+
 export default groupRouter;
