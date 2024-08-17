@@ -46,7 +46,7 @@ model Group {
 model Expense {
   id String @id @default (auto()) @map("_id") @db.ObjectId
   cost Float 
-  date DateTime
+  date DateTime @default(now())
   name String
 
   group Group @relation(fields: [groupId], references: [id])
@@ -55,16 +55,16 @@ model Expense {
   user User @relation(fields: [userId], references: [id])
   userId String @db.ObjectId
 
-  category Category @relation(fields: [categoryId], references: [id])
-  categoryId String @db.ObjectId
+  //category Category @relation(fields: [categoryId], references: [id])
+  //categoryId String @db.ObjectId
 
 }
 
-model Category {
-  id String @id @default (auto()) @map("_id") @db.ObjectId
-  name String 
-  expenses Expense[]
-}
+//model Category {
+  //id String @id @default (auto()) @map("_id") @db.ObjectId
+  //name String 
+  //expenses Expense[]
+//}
 
 model Return {
   id String @id @default (auto()) @map("_id") @db.ObjectId

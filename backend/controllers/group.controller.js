@@ -6,7 +6,6 @@ export async function createGroup(request, response){
     
     const {name, description} = request.body;
     const adminId = request.user;
-
     if (!name | !description){
         response.status(400).json({
             message: "Name ali description nam manjka"
@@ -59,4 +58,6 @@ export async function addUser(request, response){
         message : "you have been added to group!"
     });
 }
+
+
 

@@ -48,8 +48,10 @@ function AddExpenseForm({ groupId, closePopUp }) {
       setExpensi((expensi) => (
         [...expensi, group]
         ))
-        setExpense('');
-        setCost('');
+        setDataExpensa({
+          name : '',
+          cost : ''
+        })
 
       toast.success(response.message);
 
@@ -60,9 +62,7 @@ function AddExpenseForm({ groupId, closePopUp }) {
     }
 
   }
-  
-  
-  
+
   return (
     <PopUp>
       

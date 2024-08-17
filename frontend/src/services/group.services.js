@@ -5,7 +5,7 @@ import axios from "../config/axios";
 
 export async function createGroup(data){
     const response = await axios.post("/groups/", data);
-    console.log("Response" + response)
+    console.log("Response: " + response)
     if(response.data){
         console.log(response.data);
     }
@@ -39,6 +39,8 @@ export async function addExpense(userId, groupId){
     const response = await axios.post(`/groups/invite?userId=${userId}&groupId=${groupId}`);
     return response.data;
 }
+
+
 
 
 

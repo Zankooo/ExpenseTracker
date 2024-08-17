@@ -52,6 +52,16 @@ export class GroupService {
         }
       })
     }
+
+    static async getExpenses(groupId){
+        const expenses = await prisma.expense.findMany({
+          where : {groupId : groupId }
+        })
+        return expenses;
+    }
+
+    
+    
 }
 
 
