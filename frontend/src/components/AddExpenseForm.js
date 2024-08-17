@@ -4,9 +4,10 @@ import { MdClose, MdOutlineEuroSymbol } from "react-icons/md";
 import { PopUp } from './PopUp';
 import './AddExpenseForm.css'
 import toast from 'react-hot-toast';
-import { addExpense } from '../services/group.services';
+import { addExpense } from '../services/expense.services';
 
-function AddExpenseForm({ groupId, closePopUp }) {
+
+function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
   // Use the environment variable
   const APP_URL = process.env.REACT_APP_URL;
 
@@ -19,7 +20,8 @@ function AddExpenseForm({ groupId, closePopUp }) {
     name: '', cost : ''
   });
 
-  const [expensi, setExpensi] = useState([]);
+
+  
 
   useEffect(() => {
     console.log(expense);
@@ -43,32 +45,32 @@ function AddExpenseForm({ groupId, closePopUp }) {
       const response = await addExpense(dataExpensa);
       console.log('Uspešno!', response);
       // ni response.group ampak je neki druzga    
-      const group = response.group;
+      const expense = response.expense;
       //in od tukej spodaj treba spremenit vse
       setExpensi((expensi) => (
-        [...expensi, group]
+        [...expensi, expense]
         ))
-        setDataExpensa({
+      setDataExpensa({
           name : '',
           cost : ''
         })
-
+      closeExpenseForm();
       toast.success(response.message);
-
+  
     } catch (error) {
       console.log("Login ne dela ker: " , error)
-      toast.error(error.response.data.message);
-      
+      toast.error(error.response.data.message);   
     }
-
   }
+
+  
 
   return (
     <PopUp>
       
       <div className='header'>
         <h2>Add Expense</h2>
-        <MdClose onClick={closePopUp}/>
+        <MdClose onClick={closeExpenseForm}/>
       </div>
 
       {/* Use the environment variable to set the input value */}

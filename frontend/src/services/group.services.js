@@ -33,12 +33,14 @@ export async function addUser(userId, groupId){
     return response.data;
 }
 
-//dodal za expense
-export async function addExpense(userId, groupId){
-    //sam nevem kaj dat v oklepaje
-    const response = await axios.post(`/groups/invite?userId=${userId}&groupId=${groupId}`);
+export async function getExpenses(groupId){
+    const response = await axios.get(`/groups/expenses?groupId=${groupId}`)
+    if (response.data){
+        console.log(response.data);
+    }
     return response.data;
 }
+
 
 
 
