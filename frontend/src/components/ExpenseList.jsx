@@ -14,8 +14,7 @@ function ExpenseList({expensi}) {
     <List>
       {expensi.map(function (expense) {
         return <ExpenseItem expense={expense} key={expense.id}/>
-      }
-    )}
+      })}
   </List>
   )
 }

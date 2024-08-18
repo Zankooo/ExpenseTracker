@@ -17,6 +17,7 @@ const Avatar = styled.div`
   background-color: orange;
   color: #fff;
   font-weight: 500;
+  margin-right: 7px;
 `
 
 function UserDetails({username}) {

@@ -23,10 +23,6 @@ const ExpenseItemCard = styled.div`
     font-size: 16px;
     font-weight: 600;
   }
-
-  .username {
-    margin-left: 5px;
-  }
 `
 
 function ExpenseItem({expense}) {

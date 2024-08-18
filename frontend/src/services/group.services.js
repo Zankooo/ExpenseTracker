@@ -38,6 +38,9 @@ export async function getTotal(groupId) {
     return response.data;
 }
 
-
+export async function getReturns(groupId) {
+    const response = await axios.get(`/groups/returns?groupId=${groupId}`);
+    return response.data;
+}
 
 

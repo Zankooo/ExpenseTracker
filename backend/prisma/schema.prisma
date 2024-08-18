@@ -40,7 +40,6 @@ model Group {
   description String 
   expenses Expense[]
   members UserGroup[] 
-
 }
 
 model Expense {

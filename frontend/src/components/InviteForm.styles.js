@@ -10,4 +10,5 @@ export const InviteButton = styled.button`
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+    color: cyan;
 `

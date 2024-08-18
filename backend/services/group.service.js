@@ -98,7 +98,7 @@ export class GroupService {
     return total;
   }
 
-  static async getTotalByMember(groupId){
+  static async getTotalByMember(groupId) {
     const result2 = await prisma.group.findUnique({
       where: {
         id: groupId,
@@ -126,15 +126,10 @@ export class GroupService {
     });
 
     const totalByUser = result2.members.map((obj) => ({
-      userId: obj.user.id,
+      user: { username: obj.user.username, userId: obj.user.id },
       cost: obj.user.expenses.reduce((sum, { cost }) => sum + cost, 0),
     }));
-    
+
     return totalByUser;
   }
-
-
-
-  
 }
-
