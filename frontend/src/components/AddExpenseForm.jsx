@@ -61,7 +61,6 @@ function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
     }
   }
 
-  
 
   return (
     <PopUp>

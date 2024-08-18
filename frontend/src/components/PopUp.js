@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PopUp = styled.div`
-    
     padding: 22px 30px;
     display: flex;
     width: 400px;

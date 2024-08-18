@@ -97,6 +97,44 @@ export class GroupService {
     });
     return total;
   }
+
+  static async getTotalByMember(groupId){
+    const result2 = await prisma.group.findUnique({
+      where: {
+        id: groupId,
+      },
+      select: {
+        members: {
+          select: {
+            user: {
+              select: {
+                id: true,
+                username: true,
+                expenses: {
+                  where: {
+                    groupId: groupId,
+                  },
+                  select: {
+                    cost: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const totalByUser = result2.members.map((obj) => ({
+      userId: obj.user.id,
+      cost: obj.user.expenses.reduce((sum, { cost }) => sum + cost, 0),
+    }));
+    
+    return totalByUser;
+  }
+
+
+
+  
 }
 
-// name, description
