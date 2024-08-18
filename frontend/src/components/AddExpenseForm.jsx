@@ -8,47 +8,45 @@ import { addExpense } from '../services/expense.services';
 
 
 function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
-  // Use the environment variable
-  const APP_URL = process.env.REACT_APP_URL;
 
   const [copied, setCopied] = useState(false);
-  
-  const [expense, setExpense] = useState();
-  const [cost, setCost] = useState();
 
   const [dataExpensa, setDataExpensa] = useState({
     name: '', cost : ''
-  });
+  }); 
 
-
-  
-
-  useEffect(() => {
-    console.log(expense);
-    console.log(cost);
-  }, [expense, cost]); 
+  function isValidInput() {
+    const costNum = Number(dataExpensa.cost);
+    return !isNaN(costNum);
+  }
 
   function handleChange(event) {
-    const { id, value } = event.target;
-    if (id === 'inputName') {
-      setExpense(value);
-    } else if (id === 'inputCost') {
-      setCost(value);
-    }
+    setDataExpensa((expense) => ({
+      ...expense,
+      [event.target.name]: event.target.value
+    }))
   }
 
   
 // pattern matching iz filea- kjer smo ustvarjali grupo
   async function handleSubmit(event){
     event.preventDefault();
+    if (!isValidInput()) {
+      toast.error("Invalid input for cost");
+      return;
+    }
     try {
-      const response = await addExpense(dataExpensa);
+      const data = {
+        name: dataExpensa.name,
+        cost: Number(dataExpensa.cost)
+      }
+      const response = await addExpense(groupId, data);
       console.log('Uspešno!', response);
       // ni response.group ampak je neki druzga    
       const expense = response.expense;
       //in od tukej spodaj treba spremenit vse
       setExpensi((expensi) => (
-        [...expensi, expense]
+        [expense, ...expensi]
         ))
       setDataExpensa({
           name : '',
@@ -67,7 +65,6 @@ function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
 
   return (
     <PopUp>
-      
       <div className='header'>
         <h2>Add Expense</h2>
         <MdClose onClick={closeExpenseForm}/>
@@ -79,18 +76,20 @@ function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
         <div id='bothInputs'>
           
           <input 
-          id='inputName' 
+          id='inputName'
+          name='name'
           placeholder='Expense name'
           onChange={handleChange}
-          value={expense}
+          value={dataExpensa.name}
           ></input>
 
           <input 
           id="inputCost"  
+          name="cost"
           placeholder='eur' 
           maxLength={5}
           onChange={handleChange}
-          value={cost}></input>
+          value={dataExpensa.cost}></input>
 
         </div>
 

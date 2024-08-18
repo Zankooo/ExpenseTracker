@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
-import { getExpenses, getGrupa } from '../../services/group.services';
-import InviteForm, { InviteButton } from '../../components/InviteForm.js';
+import { getExpenses, getGrupa, getMembers } from '../../services/group.services';
+import InviteForm, { InviteButton } from '../../components/InviteForm';
 import { Button } from './Group.styles.js';
-import { Container } from '../../components/Container.js';
-import { Header } from '../../components/Header.js';
-import  AddExpenseForm  from '../../components/AddExpenseForm.js';
-import ExpenseItem from '../../components/ExpenseItem.js';
-
-
+import { GroupContainer } from '../../components/Container';
+import { Header } from '../../components/Header';
+import  AddExpenseForm  from '../../components/AddExpenseForm';
+import ExpenseList from '../../components/ExpenseList';
+import Page from '../../components/Page.js';
+import Sidebar from '../../components/Sidebar.jsx';
+import Card from '../../components/Card.jsx';
+import MemberList from '../../components/MemberList.jsx';
+import Row from '../../components/Row.jsx'
 
 function Group() {  
   
@@ -19,10 +22,40 @@ function Group() {
   const [isExpenseFormOpen, setIsExpenseFormOpen] = useState(false);
 
   const [expensi, setExpensi] = useState([]);
+  
+  const [total, setTotal] = useState(0);
+
+  const [spentByMe, setSpentByMe] = useState(0);
+
+  const [members, setMembers] = useState([]);
+  
+  useEffect(() => {
+    const t = calculateTotal();
+    const t2 = calculateSpentByMe();
+    setTotal(t);
+    setSpentByMe(t2);
+
+    // še spent by me
+  }, [expensi]);
+
+  let user = localStorage.getItem('user')
+  user = JSON.parse(user);
+  const userId = user.username;
+  
+  
+  function calculateSpentByMe(){
+    const myExpenses = expensi.filter(function filtering(expense){
+      return expense.user.username === userId;
+    })
+    return myExpenses.reduce(function sum(total, {cost}){
+      return total + cost;
+    }, 0);
+  }
+
+
 
   function openPopUp(){
     setIsPopOpen(true);
-    
   }
 
   function closePopUp(){
@@ -36,14 +69,23 @@ function Group() {
 
   async function fetchGroupData(){
     const response = await getGrupa(groupId);
-    console.log('response je ' , response);
     setGrupa(response.group);
+  }
+
+  async function fetchMembers() {
+    const response = await getMembers(groupId);
+    setMembers(response.members);
   }
 
   async function fetchExpenses(){
     const response = await getExpenses(groupId);
-    console.log('Response je ', response);
     setExpensi(response.expenses);
+  }
+
+  function calculateTotal() {
+    return expensi.reduce((sum, {cost}) => {
+      return sum + cost
+    }, 0)
   }
 
   function openExpenseForm(){
@@ -53,42 +95,44 @@ function Group() {
   useEffect(() =>{
     fetchGroupData();
     fetchExpenses();
+    fetchMembers();
   }, []);
-
-  useEffect(() =>{
-    console.log(grupa);
-  }, [grupa]);
   
   if (!grupa){
     return <h1></h1>
   }
   
   return (
-    <>
+    <Page>
     <Header>
       <div>
         <h1>{grupa.name}</h1>
         <h3>{grupa.description}</h3>
       </div>
-      <Button onClick={openPopUp}>Invite a person</Button>
+      <Row>
+        <MemberList members={members}/>
+        <Button onClick={openPopUp}>Invite a person</Button>
+      </Row>
     </Header>
-    <Container>
-      <Button onClick={openExpenseForm}>Expense form</Button>
-      mormo prikazat une 
+    <GroupContainer>
+      <Sidebar>
+        <Button onClick={openExpenseForm}>New expense</Button> 
+      <div>
+        {expensi.length > 0 ? <ExpenseList expensi={expensi}/> : 
+        (<h3>No expenses!</h3>)}
+      </div>
+      </Sidebar>
+      <Card>
+        <h3>Total spent</h3>
+        <div>{total} €</div>
+      </Card>
 
-      <div className='logika-za-grupe'>
-      {expensi.length > 0 ? (
-        <div>
-          {expensi.map(function (expense) {
-            return <ExpenseItem expense={expense}>
-              
-              </ExpenseItem>
-      })}
-    </div>
-    ) : (<h3 className='naredi-ce-ni-grup'>No expenses!</h3>)}
-    </div>
+      <Card>
+        <h3>Spent by me</h3>
+        <div>{spentByMe} €</div>
+      </Card>
 
-    </Container>
+    </GroupContainer>
 
     <div>
       {isPopOpen ? <InviteForm groupId={groupId} closePopUp={closePopUp}></InviteForm> : <></> }
@@ -98,7 +142,7 @@ function Group() {
     </div>
     
 
-    </>
+    </Page>
   )
 }
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PopUp = styled.form`
+export const PopUp = styled.div`
     
     padding: 22px 30px;
     display: flex;
@@ -12,6 +12,8 @@ export const PopUp = styled.form`
     flex-direction: column;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
     border-radius: 11px;
+    z-index: 9999;
+    background-color: white;
    
     .header {
         display: flex;

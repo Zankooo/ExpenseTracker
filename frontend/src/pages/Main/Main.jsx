@@ -6,7 +6,7 @@ import { MdLogout } from "react-icons/md";
 import {createGroup, getGroupsForUser} from "../../services/group.services";
 import toast from 'react-hot-toast';
 import GroupItem from '../../components/GroupItem.js';
-import { Container } from '../../components/Container.js';
+import { Container } from '../../components/Container';
 import { Header } from '../../components/Header.js';
 
 
@@ -20,8 +20,6 @@ function Main() {
 
     const [groups, setGroups] = useState([]);
 
-  
-    
     useEffect(() => {
       let user = localStorage.getItem("user");
       user = JSON.parse(user);

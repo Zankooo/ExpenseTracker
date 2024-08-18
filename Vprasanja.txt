@@ -14,3 +14,4 @@ Tako da sem delal z navadnim cssjem
 
 
 
+Neznam brat ko inspectam page po komponentah; pač kaj je kaj?
