@@ -15,3 +15,9 @@ Tako da sem delal z navadnim cssjem
 
 
 Neznam brat ko inspectam page po komponentah; pač kaj je kaj?
+
+Favicon dodal nov, ampak dela samo v chroome v login in main page. Drugje se 
+spremeni v un react icon. Cudno pac ker sm vse tiste react png-je zbrisal
+V safariju pa sploh ne dela.
+
+Title dela pa za vse, to je samo cudno majkemi

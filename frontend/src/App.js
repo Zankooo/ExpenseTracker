@@ -7,10 +7,12 @@ import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Group from './pages/Group/Group';
 import Invite from './pages/Invite/Invite';
+import {Helmet} from 'react-helmet';
 
 function App() {
   
   return (
+    
     <div>
     
     <Router>
@@ -30,6 +32,7 @@ function App() {
     
 
     </div>
+    
   );
 }
 

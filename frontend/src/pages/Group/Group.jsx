@@ -14,6 +14,7 @@ import MemberList from '../../components/MemberList.jsx';
 import Row from '../../components/Row.jsx'
 import ReturnsSidebar from '../../components/ReturnsSidebar.jsx';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 const Main = styled.div`
   display: flex;
@@ -126,6 +127,7 @@ function Group() {
   }
   
   return (
+  
     <Page>
     <Header>
       <div>
@@ -173,7 +175,6 @@ function Group() {
       {isExpenseFormOpen ? <AddExpenseForm groupId={groupId} closeExpenseForm={closeExpenseForm} setExpensi={setExpensi}></AddExpenseForm> : <></> }
     </div>
     
-
     </Page>
   )
 }

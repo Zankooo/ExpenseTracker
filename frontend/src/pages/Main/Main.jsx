@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import GroupItem from '../../components/GroupItem.js';
 import { Container } from '../../components/Container';
 import { Header } from '../../components/Header.js';
-
+import { Helmet } from 'react-helmet';
 
 function Main() {
     const [user,setUser] = useState(null);
@@ -84,7 +84,10 @@ function Main() {
     }
 
   return (
+
     <>
+    
+
     <Header>
 
       <h1>Welcome {user && user.username}</h1>  
