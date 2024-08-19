@@ -13,14 +13,18 @@ export class ExpenseService {
     });
     return expense;
   }
+
   static async simplifyDebt(groupId) {
     const members = await GroupService.getMembers(groupId);
     const totalByMember = await GroupService.getTotalByMember(groupId);
     const expensi = await GroupService.getExpenses(groupId);
+
     const total = expensi.reduce(function (sum, { cost }) {
       return sum + cost;
     }, 0);
+
     const fairShare = total / members.length;
+
     const netBalance = totalByMember.map(function (member) {
       return { ...member, netBalance: member.cost - fairShare };
     });
@@ -38,23 +42,26 @@ export class ExpenseService {
         -netBalance[i].netBalance,
         netBalance[j].netBalance
       );
+
       netBalance[i].netBalance += amount;
       netBalance[j].netBalance -= amount;
 
       transactions.push({
         from: netBalance[i],
         to: netBalance[j],
-        amount: amount.toFixed(2),
+        amount: parseFloat(amount.toFixed(2)),
       });
 
       if (netBalance[i].netBalance === 0) i++;
       if (netBalance[j].netBalance === 0) j--;
     }
 
-    return transactions.map((transaction) => ({
-      from: transaction.from.user,
-      to: transaction.to.user,
-      amount: transaction.amount,
-    }));
+    return transactions
+      .map((transaction) => ({
+        from: transaction.from.user,
+        to: transaction.to.user,
+        amount: transaction.amount,
+      }))
+      .filter((transaction) => transaction.amount > 0);
   }
 }

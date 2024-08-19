@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import axios from '../../config/axios'
 import {login} from '../../services/auth.services'
 import toast from 'react-hot-toast';
-import { Button, Container, Forma } from './Login.styles';
+import { Container, Forma } from './Login.styles';
+import Button from '../../components/Button';
 
 
 function Login() {
@@ -77,7 +77,7 @@ function Login() {
           <input type='password' id='pwd' name='password' onChange={handleChange}></input>
         </div>
 
-        <Button>LOGIN NOW</Button>
+        <Button style={{width: "100%", marginTop: "20px"}}>LOGIN NOW</Button>
 
       </form>
       <br></br>

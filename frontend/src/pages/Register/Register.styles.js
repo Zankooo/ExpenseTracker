@@ -46,16 +46,3 @@ export const Forma = styled.div`
     margin-bottom: 10px;
   }
 `;
-
-export const Button = styled.button`
-  margin-top: 25px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-image: linear-gradient(to right, red, yellow);
-  padding: 10px 12px;
-  width: 100%;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-`;

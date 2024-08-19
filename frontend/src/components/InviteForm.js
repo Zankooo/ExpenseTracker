@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { InviteButton } from './InviteForm.styles';
 import { MdClose } from "react-icons/md";
 import { PopUp } from './PopUp';
-
+import Button from './Button';
 
 function InviteForm({ groupId, closePopUp }) {
   // Use the environment variable
@@ -34,7 +33,7 @@ function InviteForm({ groupId, closePopUp }) {
       
       {/* Use the environment variable to set the input value */}
       <input id='link' value={`${APP_URL}/invite/${groupId}`} readOnly></input>
-      <InviteButton onClick={handleClick}>Copy link</InviteButton>
+      <Button onClick={handleClick}>Copy link</Button>
       <br></br>
       <div>{copied ? <p style={{color:"green"}}>Link copied!</p> : ""}</div>
     </PopUp>

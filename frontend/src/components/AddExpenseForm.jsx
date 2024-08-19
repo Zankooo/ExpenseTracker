@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { InviteButton } from './InviteForm.styles';
-import { MdClose, MdOutlineEuroSymbol } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 import { PopUp } from './PopUp';
 import './AddExpenseForm.css'
 import toast from 'react-hot-toast';
 import { addExpense } from '../services/expense.services';
+import Button from './Button';
 
 
 function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
-
-  const [copied, setCopied] = useState(false);
 
   const [dataExpensa, setDataExpensa] = useState({
     name: '', cost : ''
@@ -92,7 +90,7 @@ function AddExpenseForm({ groupId, closeExpenseForm, setExpensi }) {
 
         </div>
 
-        <InviteButton type='submit'>Add expense</InviteButton>
+        <Button type='submit' style={{width: "100%"}}>Add expense</Button>
         
         <br></br>
         

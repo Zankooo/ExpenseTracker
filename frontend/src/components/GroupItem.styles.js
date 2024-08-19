@@ -20,7 +20,8 @@ export const Card = styled.div`
         
         border-top-right-radius: 11px;
         border-top-left-radius: 11px;
-        background-color: #E0E0E0;
+        background-color: #0071e3;
+        color: #fff;
         padding: 7px;
 
     }

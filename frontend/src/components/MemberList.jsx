@@ -5,6 +5,11 @@ import UserDetails from './UserDetails'
 const Row = styled.div`
   display: flex;
   flex-direction: row;
+  margin-right: 20px;
+
+  & > * {
+    margin-right: 10px;
+  }
 `
 
 

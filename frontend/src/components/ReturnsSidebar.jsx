@@ -14,13 +14,13 @@ const List = styled.div`
 function ReturnsSidebar
 ({returns}) {
   return (
-    <Sidebar>
-      <List>
-        {returns.map(function (r) {
-          return <ReturnItem returnObject={r}/>
-        })}
-      </List>
-    </Sidebar>
+
+    <List>
+      {returns.map(function (r) {
+        return <ReturnItem returnObject={r}/>
+      })}
+    </List>
+
   )
 }
 

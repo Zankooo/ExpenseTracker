@@ -108,6 +108,18 @@ groupRouter.get(
   }
 );
 
+groupRouter.get(
+  "/totalByMember",
+  authMiddleWare,
+  async function (request, response) {
+    const { groupId } = request.query;
+    const totals = await GroupService.getTotalByMember(groupId);
+    response.status(200).json({
+      totals: totals,
+    });
+  }
+);
+
 groupRouter.get("/returns", authMiddleWare, async function (request, response) {
   const { groupId } = request.query;
   const result = await ExpenseService.simplifyDebt(groupId);

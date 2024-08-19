@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../config/axios'
 import {register} from '../../services/auth.services'
 import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { Forma, Container, Button } from './Register.styles';
+import { Forma, Container } from './Register.styles';
+import Button from '../../components/Button';
 
 
 
@@ -81,7 +81,7 @@ function Register() {
             <input type='password' id='pwd' name='password' onChange={handleChange}></input>
           </div>
 
-          <Button>REGISTER NOW</Button>
+          <Button style={{width: "100%", marginTop: "20px"}}>REGISTER NOW</Button>
           
 
         </form>

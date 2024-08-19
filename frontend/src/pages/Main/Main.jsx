@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import { register } from '../../services/auth.services';
-import { Button, Grid} from './Main.styles';
+import { Grid} from './Main.styles';
 import { MdLogout } from "react-icons/md";
 import {createGroup, getGroupsForUser} from "../../services/group.services";
 import toast from 'react-hot-toast';
 import GroupItem from '../../components/GroupItem.js';
 import { Container } from '../../components/Container';
 import { Header } from '../../components/Header.js';
-import { Helmet } from 'react-helmet';
+import Button from '../../components/Button.jsx'
+import CreateGroupForm from '../../components/CreateGroupForm.jsx';
 
 function Main() {
     const [user,setUser] = useState(null);
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-      name: '', description : ''
-    });
-
     const [groups, setGroups] = useState([]);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     useEffect(() => {
       let user = localStorage.getItem("user");
@@ -31,11 +29,6 @@ function Main() {
       setUser(user);
     }, []);
 
-    useEffect(() => {
-      console.log("Tole so grupe: " , groups);
-      console.log("tole je form data: " , formData);
-    }, [groups, formData]);
-
     useEffect( () => {
       pridobiGroups();
     }, [user]);
@@ -47,41 +40,20 @@ function Main() {
       }
         
     }
+
+    function openPopup() {
+      setIsPopupOpen(true);
+    }
+
+    function closePopup() {
+      setIsPopupOpen(false);
+    }
     
     function logout() {
         localStorage.removeItem("user");
         navigate("/login");
     }
 
-    function handleChange(event) {
-      setFormData((prevState) => ({
-        ...prevState,
-        [event.target.name] : event.target.value 
-      }));
-      
-    };
-
-    async function handleSubmit(event){
-      event.preventDefault();
-      try {
-        const response = await createGroup(formData);
-        console.log("Uspešno!", response);
-        const group = response.group;
-        setGroups((groups) => (
-          [...groups, group]
-          ))
-        setFormData({
-          name: '', description : ''
-        })
-        toast.success(response.message);
-  
-      } catch (error) {
-        console.log('Login ne dela ker: ' , error);
-        toast.error(error.response.data.message);
-        
-      }
-
-    }
 
   return (
 
@@ -99,16 +71,7 @@ function Main() {
     </Header>
 
     <Container>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='name'>Group name:</label>
-      <input id='name' name='name' onChange={handleChange} value={formData.name}></input>
-
-      <label htmlFor='description'>Group description:</label>
-      <input name='description' id='description' onChange={handleChange} value={formData.description}></input>
-
-      <button>Button</button>
-    </form>
-   
+    <Button onClick={openPopup}>New group</Button>
    
     <br></br>
     <div className='logika-za-grupe'>
@@ -124,7 +87,7 @@ function Main() {
     </div>
     
     </Container>
-
+    {isPopupOpen ? <CreateGroupForm closePopup={closePopup} setGroups={setGroups}/> : <></>}
     </>
   )
 }

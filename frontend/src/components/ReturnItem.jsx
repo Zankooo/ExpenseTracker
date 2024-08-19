@@ -15,7 +15,7 @@ function ReturnItem({returnObject}) {
   return (
     <ReturnRow>
       <UserDetails username={returnObject.from.username}/>
-        <Arrow text={returnObject.amount}>
+        <Arrow text={returnObject.amount + "€"}>
 
         </Arrow>
       <UserDetails username={returnObject.to.username}/>

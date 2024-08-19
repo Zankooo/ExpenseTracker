@@ -14,7 +14,7 @@ const Avatar = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: orange;
+  background-color: #d85e78;
   color: #fff;
   font-weight: 500;
   margin-right: 7px;
