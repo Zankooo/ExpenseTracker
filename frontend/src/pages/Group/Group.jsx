@@ -162,6 +162,7 @@ function Group() {
     <Page>
     <Header>
     <Row>
+      <MdArrowBackIosNew style={{marginRight:'20px', cursor:'pointer'}} size={30} onClick={() => navigate('/')} />
       <div>
         <h1>{grupa.name}</h1>
         <h3>{grupa.description}</h3>
