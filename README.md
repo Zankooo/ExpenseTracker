@@ -2,7 +2,7 @@
 
 ## The application allows users to create groups, where they can invite other members. The primary goal is to record all expenses made by the group members and then fairly distribute the total costs among everyone. This application is particularly useful for students living together for extended periods, as it helps manage shared expenses efficiently. Expense Tracker was developed as a school project with the help of my friend, ChatGPT, and YouTube tutorials. Special thanks to all who contributed! 
 
-### Through this project, I learned the fundamentals of building practical software applications, and I was able to achieve my goal.
+### Through this project, I learned the fundamentals of building full-stack practical software applications, and I was able to achieve my goal.
 
 ### Technologies used:
 
